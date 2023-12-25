@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de usuarios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body>
+  <nav class="d-flex navbar bg-dark p-3" data-bs-theme="dark">
+    <div class="d-flex align-items-center gap-4">
+      <a href="#">
+        <i class="fa-solid fa-arrow-left" style="color: #ffffff;"></i>
+      </a>
+
+      <span class="navbar-brand mb-0 h1">Lista de usuarios</span>
+    </div>
+
+    <a th:href="@{/create}" class="btn btn-light">Cadastrar usuario</a>
+  </nav>
+
+    <table class="table" th:unless="${#lists.isEmpty(users)}">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Email</th>
+            <th scope="col">Senha</th>
+            <th scope="col">Deletar ou editar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="user : ${users}">
+            <th scope="row" class="align-middle" th:text="${user.id}">1</th>
+            <td class="align-middle" th:text="${user.name}">Mark</td>
+            <td class="align-middle" th:text="${user.email}">Otto</td>
+            <td class="align-middle" th:text="${user.password}">@mdo</td>
+            <td>
+              <a th:href="@{/remove/{id}(id=${user.id})}" class="btn btn-outline-danger">Deletar</a>
+              <a th:href="@{/edit/{id}(id=${user.id})}" class="btn btn-primary">Editar</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p th:if="${#lists.isEmpty(users)}">Nenhum usuario cadastrado</p>
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+</html>
